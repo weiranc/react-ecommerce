@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <div className='App'>
+      HELLO
     </div>
   );
-}
+};
 
 export default App;
