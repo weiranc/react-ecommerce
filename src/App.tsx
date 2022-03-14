@@ -34,6 +34,22 @@ const App = () => {
       .catch((err) => console.error(err));
   };
 
+  const countTotalItems = (items: ProductType[]) => (
+    items.reduce((accumulate: number, items) => accumulate + items.amount, 0)
+  )
+
+  const handleAddToCart = (selectedProduct: ProductType) => {
+    setCartItems(prev => {
+      const isProductAddedToCart = prev.find(product => product.id === selectedProduct.id);
+      if (isProductAddedToCart) {
+        return prev.map(product => product.id === selectedProduct.id ? {...product, amount: product.amount + 1} : product);
+      } else {
+        return [...prev, {...selectedProduct, amount: 1}];
+      }
+    })
+  }
+
+
   return (
     <div className='App'>
       <SearchBar />
