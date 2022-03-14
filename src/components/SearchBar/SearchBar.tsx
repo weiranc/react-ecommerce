@@ -83,7 +83,6 @@ const SearchBar: React.FC<SearchBarProps> = ({cartItems, openCart}) => {
             </Box>
             <button className='cart_button' onClick={() => openCart()}>
               <Badge badgeContent={countTotalItems(cartItems)} color='error'>
-              {/* <Badge badgeContent={2} color='error'> */}
                 <AddShoppingCartIcon />
               </Badge>
             </button>

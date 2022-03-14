@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ProductList from './components/products/ProductList';
-import { Grid } from '@mui/material';
+import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
+import Cart from './components/Cart/Cart';
 
 export type ProductType = {
   id: number;
@@ -34,8 +35,6 @@ const App = () => {
       .catch((err) => console.error(err));
   };
 
-
-
   const handleAddToCart = (selectedProduct: ProductType) => {
     setCartItems(prev => {
       const isProductAddedToCart = prev.find(product => product.id === selectedProduct.id);
@@ -57,6 +56,13 @@ const App = () => {
         cartItems={cartItems}
         openCart={openCart}
       />
+      <Drawer
+        anchor='right'
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+      >
+        <Cart cartItems={cartItems} />
+      </Drawer>
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <LeftBar />
