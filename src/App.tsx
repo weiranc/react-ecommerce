@@ -1,9 +1,20 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import ProductList from './components/products/ProductList';
+
+export type ProductType = {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  amount: number;
+}
 
 const App = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([] as ProductType[]);
   useEffect(() => {
     getData();
   }, []);
@@ -18,7 +29,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      HELLO
+      <ProductList data={data}/>
     </div>
   );
 };

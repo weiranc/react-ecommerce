@@ -1,9 +1,14 @@
 import React from 'react';
+import { ProductType } from '../../App';
 
-const product = () => {
+type ProductProps = {
+  product: ProductType;
+};
+
+const Product: React.FC<ProductProps> = ({product}) => {
   return (
     <div></div>
   );
 }
 
-export default product;
+export default Product;
