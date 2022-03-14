@@ -53,13 +53,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const countTotalItems = (items: ProductType[]) => {
+  return items.reduce((accumulate: number, items) => accumulate + items.amount, 0);
+}
+
 type SearchBarProps = {
   cartItems: ProductType[];
-  countTotalItems: (items: ProductType[]) => void;
   openCart: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({cartItems, countTotalItems, openCart}) => {
+const SearchBar: React.FC<SearchBarProps> = ({cartItems, openCart}) => {
   return (
     <div className='search_bar'>
       <Box sx={{ flexGrow: 1 }}>

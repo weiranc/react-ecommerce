@@ -34,9 +34,7 @@ const App = () => {
       .catch((err) => console.error(err));
   };
 
-  const countTotalItems = (items: ProductType[]) => {
-    return items.reduce((accumulate: number, items) => accumulate + items.amount, 0);
-  }
+
 
   const handleAddToCart = (selectedProduct: ProductType) => {
     setCartItems(prev => {
@@ -56,7 +54,6 @@ const App = () => {
   return (
     <div className='App'>
       <SearchBar
-        countTotalItems={countTotalItems}
         cartItems={cartItems}
         openCart={openCart}
       />
