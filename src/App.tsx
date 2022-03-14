@@ -14,21 +14,25 @@ export type ProductType = {
   price: number;
   title: string;
   amount: number;
-}
+};
 
 const App = () => {
   const [data, setData] = useState([] as ProductType[]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([] as ProductType[]);
+
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    axios.get('https://fakestoreapi.com/products')
-      .then(response => {
+    axios
+      .get('https://fakestoreapi.com/products')
+      .then((response) => {
         setData(response.data);
       })
-      .catch(err => console.error(err))
-  }
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className='App'>
@@ -38,7 +42,7 @@ const App = () => {
           <LeftBar />
         </Grid>
         <Grid item xs={8}>
-          <ProductList data={data}/>
+          <ProductList data={data} />
         </Grid>
       </Grid>
     </div>
