@@ -12,7 +12,7 @@ const ProductList: React.FC<ProductProps> = ({ data }) => {
     <div>
       <Grid container spacing = {3}>
         {data && data.map((product => (
-          <Grid item key={product.id} xs={12} sm={6} md={3}>
+          <Grid item key={product.id} xs={12} sm={6} md={4}>
             <Product product={product}/>
           </Grid>
         )))}

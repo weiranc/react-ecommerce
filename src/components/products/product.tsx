@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductType } from '../../App';
-import { Card, CardHeader, CardMedia, CardContent } from '@mui/material';
+import { Card, CardMedia, CardContent } from '@mui/material';
 
 type ProductProps = {
   product: ProductType;

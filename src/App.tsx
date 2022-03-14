@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ProductList from './components/products/ProductList';
+import { Grid } from '@mui/material';
+import LeftBar from './components/LeftBar/LeftBar';
 
 export type ProductType = {
   id: number;
@@ -29,7 +31,14 @@ const App = () => {
 
   return (
     <div className='App'>
-      <ProductList data={data}/>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <LeftBar />
+        </Grid>
+        <Grid item xs={8}>
+          <ProductList data={data}/>
+        </Grid>
+      </Grid>
     </div>
   );
 };
