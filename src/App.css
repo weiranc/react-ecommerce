@@ -23,3 +23,11 @@
   object-fit: cover;
 }
 
+.cart_button {
+  position: fixed;
+  z-index: 100;
+  right: 8%;
+  top: 20px;
+  border: none;
+  background-color: transparent;
+}

@@ -4,13 +4,14 @@ import {
   AppBar,
   Box,
   Toolbar,
-  IconButton,
   Typography,
   InputBase,
   Badge,
+  Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { ProductType } from '../../App';
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -52,7 +53,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = () => {
+type SearchBarProps = {
+  cartItems: ProductType[];
+  countTotalItems: (items: ProductType[]) => void;
+  openCart: () => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({cartItems, countTotalItems, openCart}) => {
   return (
     <div className='search_bar'>
       <Box sx={{ flexGrow: 1 }}>
@@ -71,7 +78,12 @@ const SearchBar = () => {
                 />
               </Search>
             </Box>
-            <AddShoppingCartIcon />
+            <button className='cart_button' onClick={() => openCart()}>
+              <Badge badgeContent={countTotalItems(cartItems)} color='error'>
+              {/* <Badge badgeContent={2} color='error'> */}
+                <AddShoppingCartIcon />
+              </Badge>
+            </button>
           </Toolbar>
         </AppBar>
       </Box>

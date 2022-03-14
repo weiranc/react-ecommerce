@@ -4,9 +4,10 @@ import { Card, CardMedia, CardContent, Button } from '@mui/material';
 
 type ProductProps = {
   product: ProductType;
+  handleAddToCart: (selectedProduct: ProductType) => void;
 };
 
-const Product: React.FC<ProductProps> = ({ product }) => {
+const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
   return (
     <Card className='product' sx={{ maxWidth: 350 }}>
       <CardMedia>
@@ -20,7 +21,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
         <h3>{product.title}</h3>
         <h3>${product.price}</h3>
       </CardContent>
-      <Button>Add to cart</Button>
+      <Button onClick={() => handleAddToCart(product)}>Add to cart</Button>
     </Card>
   );
 };

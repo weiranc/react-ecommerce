@@ -34,9 +34,9 @@ const App = () => {
       .catch((err) => console.error(err));
   };
 
-  const countTotalItems = (items: ProductType[]) => (
-    items.reduce((accumulate: number, items) => accumulate + items.amount, 0)
-  )
+  const countTotalItems = (items: ProductType[]) => {
+    return items.reduce((accumulate: number, items) => accumulate + items.amount, 0);
+  }
 
   const handleAddToCart = (selectedProduct: ProductType) => {
     setCartItems(prev => {
@@ -49,16 +49,26 @@ const App = () => {
     })
   }
 
+  const openCart = () => {
+    setCartOpen(!cartOpen);
+  }
 
   return (
     <div className='App'>
-      <SearchBar />
+      <SearchBar
+        countTotalItems={countTotalItems}
+        cartItems={cartItems}
+        openCart={openCart}
+      />
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <LeftBar />
         </Grid>
         <Grid item xs={8}>
-          <ProductList data={data} />
+          <ProductList
+            data={data}
+            handleAddToCart={handleAddToCart}
+          />
         </Grid>
       </Grid>
     </div>
