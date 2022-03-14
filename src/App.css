@@ -1,6 +1,10 @@
 .App {
   text-align: center;
-  margin: 5%;
+  margin-inline: 5%;
+}
+
+.search_bar {
+  margin-bottom: 5px;
 }
 
 .product {

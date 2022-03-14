@@ -10,7 +10,7 @@ const LeftBar = () => {
   return (
     <div>
       <List
-        sx={{width: '100%', maxWidth: 360, bgcolor: 'lightgray' }}
+        sx={{ width: '100%', maxWidth: 360, bgcolor: 'lightgray' }}
         component='nav'
         subheader={
           <ListSubheader component='div'>

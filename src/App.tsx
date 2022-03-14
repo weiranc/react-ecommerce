@@ -4,6 +4,7 @@ import './App.css';
 import ProductList from './components/products/ProductList';
 import { Grid } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
+import SearchBar from './components/SearchBar/SearchBar';
 
 export type ProductType = {
   id: number;
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <div className='App'>
+      <SearchBar />
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <LeftBar />
