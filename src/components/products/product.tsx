@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductType } from '../../App';
-import { Card, CardMedia, CardContent } from '@mui/material';
+import { Card, CardMedia, CardContent, Button } from '@mui/material';
 
 type ProductProps = {
   product: ProductType;
@@ -18,9 +18,9 @@ const Product: React.FC<ProductProps> = ({ product }) => {
       </CardMedia>
       <CardContent>
         <h3>{product.title}</h3>
-        <p>{product.description}</p>
         <h3>${product.price}</h3>
       </CardContent>
+      <Button>Add to cart</Button>
     </Card>
   );
 };
