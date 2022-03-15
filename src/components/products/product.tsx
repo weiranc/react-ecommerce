@@ -39,7 +39,7 @@ const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
         </Box>
       </Modal>
       <CardContent>
-        <h3 onClick={handleOpenModal}>{product.title}</h3>
+        <h3 onClick={handleOpenModal} className='product_title'>{product.title}</h3>
         <h3>${product.price}</h3>
         <div className='rating'>
           <Rating name='read-only' value={product.rating.rate} readOnly />
