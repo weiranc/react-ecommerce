@@ -44,11 +44,23 @@ const App = () => {
         return [...prev, {...selectedProduct, amount: 1}];
       }
     })
-  }
+  };
+
+  const handleRemoveFromCart = (selectedProduct: ProductType) => {
+    setCartItems(prev => {
+      const isProductAmountLargerThanOne = prev.find(product => product.id === selectedProduct.id && product.amount > 1);
+      if (isProductAmountLargerThanOne) {
+        return prev.map(product => product.id === selectedProduct.id ? {...product, amount: product.amount - 1} : product);
+      } else {
+        return prev.filter(product => product.id !== selectedProduct.id);
+      }
+    })
+
+  };
 
   const openCart = () => {
     setCartOpen(!cartOpen);
-  }
+  };
 
   return (
     <div className='App'>
