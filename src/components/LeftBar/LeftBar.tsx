@@ -5,34 +5,28 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { ProductType } from '../../App';
 
-const LeftBar = () => {
+type LeftBarProps = {
+  selectByCategory: (category: ProductType['category']) => void;
+};
+
+const LeftBar: React.FC<LeftBarProps> = ({ selectByCategory }) => {
   return (
     <div>
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'lightgray' }}
         component='nav'
-        subheader={
-          <ListSubheader component='div'>
-            Categories
-          </ListSubheader>
-        }
+        subheader={<ListSubheader component='div'>Categories</ListSubheader>}
       >
-        <ListItemButton>
-          <ListItemText primary="Men's clothing"/>
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Women's clothing"/>
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Jewelery"/>
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Electronics"/>
-        </ListItemButton>
+        {["Men's clothing", "Women's clothing", 'Jewelery', 'Electronics'].map(category => (
+          <ListItemButton>
+            <ListItemText primary={category} onClick={() => selectByCategory(category)}/>
+          </ListItemButton>
+        ))}
       </List>
     </div>
-  )
+  );
 };
 
 export default LeftBar;

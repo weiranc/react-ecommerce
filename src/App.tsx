@@ -21,6 +21,8 @@ const App = () => {
   const [data, setData] = useState([] as ProductType[]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as ProductType[]);
+  const [dataByCategory, setDataByCategory] = useState([] as ProductType[]);
+  const [categories, setCategories] = useState('' as ProductType['category']);
 
   useEffect(() => {
     getData();
@@ -61,6 +63,10 @@ const App = () => {
     setCartOpen(!cartOpen);
   };
 
+  const selectByCategory = (category: ProductType['category']) => {
+    setCategories(category);
+  };
+
   return (
     <div className='App'>
       <SearchBar
@@ -80,11 +86,11 @@ const App = () => {
       </Drawer>
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <LeftBar />
+          <LeftBar selectByCategory={selectByCategory}/>
         </Grid>
         <Grid item xs={8}>
           <ProductList
-            data={data}
+            data={categories ? data.filter(product => product.category === categories.toLowerCase()) : data}
             handleAddToCart={handleAddToCart}
           />
         </Grid>
