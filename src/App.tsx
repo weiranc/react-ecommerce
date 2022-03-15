@@ -6,6 +6,7 @@ import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
 import Cart from './components/Cart/Cart';
+import { getDatabase, ref, set, onValue, query } from 'firebase/database';
 
 export type ProductType = {
   id: number;
@@ -28,16 +29,16 @@ const App = () => {
     getData();
   }, []);
 
-  const ref = firebase.firestore().collection('products');
+  const productCollection = firebase.firestore().collection('products');
 
   const getData = () => {
-    ref.onSnapshot((querySnapshot) => {
+    productCollection.onSnapshot((querySnapshot) => {
       const items: any = [];
-      querySnapshot.forEach(doc => {
+      querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
       setData(items);
-    })
+    });
   };
 
   const handleAddToCart = (selectedProduct: ProductType) => {
@@ -54,6 +55,17 @@ const App = () => {
       } else {
         return [...prev, { ...selectedProduct, amount: 1 }];
       }
+    });
+
+    const cartsDb = getDatabase();
+    set(ref(cartsDb, `carts/${selectedProduct.id}`), {
+      productId: selectedProduct.id,
+      quantity: 1,
+    });
+
+    const dbRef = ref(cartsDb, '/carts');
+    onValue(query(dbRef), (snapshot) => {
+      console.log(snapshot.val());
     });
   };
 
