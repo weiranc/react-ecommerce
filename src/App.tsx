@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import firebase from './firebase';
 import './App.css';
 import ProductList from './components/products/ProductList';
 import { Grid, Drawer } from '@mui/material';
@@ -21,20 +21,22 @@ const App = () => {
   const [data, setData] = useState([] as ProductType[]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as ProductType[]);
-  const [dataByCategory, setDataByCategory] = useState([] as ProductType[]);
   const [categories, setCategories] = useState('' as ProductType['category']);
 
   useEffect(() => {
     getData();
   }, []);
 
+  const ref = firebase.firestore().collection('products');
+
   const getData = () => {
-    axios
-      .get('https://fakestoreapi.com/products')
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((err) => console.error(err));
+    ref.onSnapshot((querySnapshot) => {
+      const items: any = [];
+      querySnapshot.forEach(doc => {
+        items.push(doc.data());
+      });
+      setData(items);
+    })
   };
 
   const handleAddToCart = (selectedProduct: ProductType) => {
