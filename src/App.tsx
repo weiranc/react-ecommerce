@@ -55,7 +55,6 @@ const App = () => {
         return prev.filter(product => product.id !== selectedProduct.id);
       }
     })
-
   };
 
   const openCart = () => {
@@ -76,6 +75,7 @@ const App = () => {
         <Cart
           cartItems={cartItems}
           handleAddToCart={handleAddToCart}
+          handleRemoveFromCart={handleRemoveFromCart}
         />
       </Drawer>
       <Grid container spacing={2}>

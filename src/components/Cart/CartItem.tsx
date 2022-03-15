@@ -5,9 +5,10 @@ import { Button } from '@mui/material';
 type CartItemProps = {
   cartItem: ProductType;
   handleAddToCart: (selectedProduct: ProductType) => void;
+  handleRemoveFromCart: (selectedProduct: ProductType) => void;
 };
 
-const CartItem: React.FC<CartItemProps> = ({ cartItem, handleAddToCart }) => {
+const CartItem: React.FC<CartItemProps> = ({ cartItem, handleAddToCart, handleRemoveFromCart }) => {
   return (
     <div className='cart_item'>
       <h3>{cartItem.title}</h3>
@@ -25,7 +26,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartItem, handleAddToCart }) => {
           size='small'
           disableElevation
           variant='contained'
-          // onClick{() => }
+          onClick={() => handleRemoveFromCart(cartItem)}
         >
           -
         </Button>
