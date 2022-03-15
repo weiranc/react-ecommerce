@@ -13,6 +13,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ProductType } from '../../App';
 
+type SearchBarProps = {
+  cartItems: ProductType[];
+  openCart: () => void;
+  setSearch: (arg0: string) => void;
+};
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -54,15 +60,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const countTotalItems = (items: ProductType[]) => {
-  return items.reduce((accumulate: number, items) => accumulate + items.amount, 0);
-}
+  return items.reduce(
+    (accumulate: number, items) => accumulate + items.amount,
+    0
+  );
+};
 
-type SearchBarProps = {
-  cartItems: ProductType[];
-  openCart: () => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({cartItems, openCart}) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  cartItems,
+  openCart,
+  setSearch,
+}) => {
   return (
     <div className='search_bar'>
       <Box sx={{ flexGrow: 1 }}>
@@ -78,6 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ({cartItems, openCart}) => {
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder='Search'
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </Search>
             </Box>

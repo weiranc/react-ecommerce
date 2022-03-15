@@ -24,6 +24,7 @@ const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as ProductType[]);
   const [categories, setCategories] = useState('' as ProductType['category']);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getData();
@@ -94,9 +95,29 @@ const App = () => {
     setCategories(category);
   };
 
+  const displayProducts = () => {
+    if (search) {
+      return data.filter(product => {
+        return product.title.toLowerCase().includes(search);
+      })
+    }
+
+    if (!categories || categories === 'All products') {
+      return data;
+    } else {
+      return data.filter(
+        (product) => product.category === categories.toLowerCase()
+      );
+    }
+  };
+
   return (
     <div className='App'>
-      <SearchBar cartItems={cartItems} openCart={openCart} />
+      <SearchBar
+        cartItems={cartItems}
+        openCart={openCart}
+        setSearch={setSearch}
+      />
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
           cartItems={cartItems}
@@ -110,13 +131,7 @@ const App = () => {
         </Grid>
         <Grid item xs={8}>
           <ProductList
-            data={
-              !categories || categories === 'All products'
-                ? data
-                : data.filter(
-                    (product) => product.category === categories.toLowerCase()
-                  )
-            }
+            data={displayProducts()}
             handleAddToCart={handleAddToCart}
           />
         </Grid>
