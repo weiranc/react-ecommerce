@@ -8,7 +8,7 @@ type CartProps = {
 
 const Cart: React.FC<CartProps> = ({cartItems}) => {
   return (
-    <div>
+    <div className='cart'>
       <h2>Selected items:</h2>
       {cartItems && cartItems.map(cartItem => (
         <CartItem cartItem={cartItem} />

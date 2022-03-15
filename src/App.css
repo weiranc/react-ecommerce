@@ -23,6 +23,11 @@
   object-fit: cover;
 }
 
+.cart {
+  width: 500px;
+  padding: 20px;
+}
+
 .cart_button {
   position: fixed;
   z-index: 100;
@@ -30,4 +35,29 @@
   top: 20px;
   border: none;
   background-color: transparent;
+}
+
+.cart_item {
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 20px;
+}
+
+.cart_item div {
+  flex: 1;
+}
+
+.cart_update_amount, .cart_item_info {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 25%;
+}
+
+.cart_img {
+  max-width: 100px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
