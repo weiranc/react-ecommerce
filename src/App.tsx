@@ -61,7 +61,10 @@ const App = () => {
         open={cartOpen}
         onClose={() => setCartOpen(false)}
       >
-        <Cart cartItems={cartItems} />
+        <Cart
+          cartItems={cartItems}
+          handleAddToCart={handleAddToCart}
+        />
       </Drawer>
       <Grid container spacing={2}>
         <Grid item xs={3}>
