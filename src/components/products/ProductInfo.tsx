@@ -39,7 +39,7 @@ const ProductInfo: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
               <span>{product.rating.count} ratings</span>
             </div>
             <h3>${product.price}</h3>
-            <p>Description: {product.description}</p>
+            <span>Description: {product.description}</span>
           </Grid>
         </Grid>
       </Box>

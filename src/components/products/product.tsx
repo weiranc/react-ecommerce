@@ -8,6 +8,7 @@ import {
   Button,
   Rating,
   Modal,
+  Box,
 } from '@mui/material';
 
 type ProductProps = {
@@ -33,7 +34,9 @@ const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
         ></img>
       </CardMedia>
       <Modal open={modalOpen} onClose={handleOpenModal}>
-        <ProductInfo product={product} handleAddToCart={handleAddToCart} />
+        <Box>
+          <ProductInfo product={product} handleAddToCart={handleAddToCart} />
+        </Box>
       </Modal>
       <CardContent>
         <h3 onClick={handleOpenModal}>{product.title}</h3>
