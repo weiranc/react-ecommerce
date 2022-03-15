@@ -15,6 +15,7 @@ export type ProductType = {
   price: number;
   title: string;
   amount: number;
+  rating: Record<string, number>;
 };
 
 const App = () => {

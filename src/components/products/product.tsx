@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductType } from '../../App';
-import { Card, CardMedia, CardContent, Button } from '@mui/material';
+import { Card, CardMedia, CardContent, Button, Rating } from '@mui/material';
 
 type ProductProps = {
   product: ProductType;
@@ -20,6 +20,7 @@ const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
       <CardContent>
         <h3>{product.title}</h3>
         <h3>${product.price}</h3>
+        <Rating name="read-only" value={product.rating.rate} readOnly />
       </CardContent>
       <Button onClick={() => handleAddToCart(product)}>Add to cart</Button>
     </Card>
