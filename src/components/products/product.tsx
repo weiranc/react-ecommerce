@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProductType } from '../../App';
-import { Card, CardMedia, CardContent, Button, Rating } from '@mui/material';
+import ProductInfo from './ProductInfo';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Button,
+  Rating,
+  Modal,
+} from '@mui/material';
 
 type ProductProps = {
   product: ProductType;
@@ -8,6 +16,12 @@ type ProductProps = {
 };
 
 const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
   return (
     <Card className='product' sx={{ maxWidth: 350 }}>
       <CardMedia>
@@ -15,10 +29,14 @@ const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
           className='product_img'
           src={product.image}
           alt={product.title}
+          onClick={handleOpenModal}
         ></img>
       </CardMedia>
+      <Modal open={modalOpen} onClose={handleOpenModal}>
+        <ProductInfo product={product} handleAddToCart={handleAddToCart} />
+      </Modal>
       <CardContent>
-        <h3>{product.title}</h3>
+        <h3 onClick={handleOpenModal}>{product.title}</h3>
         <h3>${product.price}</h3>
         <div className='rating'>
           <Rating name='read-only' value={product.rating.rate} readOnly />
