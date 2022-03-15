@@ -19,7 +19,7 @@ const LeftBar: React.FC<LeftBarProps> = ({ selectByCategory }) => {
         component='nav'
         subheader={<ListSubheader component='div'>Categories</ListSubheader>}
       >
-        {["Men's clothing", "Women's clothing", 'Jewelery', 'Electronics'].map(category => (
+        {['All products', "Men's clothing", "Women's clothing", 'Jewelery', 'Electronics'].map(category => (
           <ListItemButton>
             <ListItemText primary={category} onClick={() => selectByCategory(category)}/>
           </ListItemButton>

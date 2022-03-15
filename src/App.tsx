@@ -38,25 +38,37 @@ const App = () => {
   };
 
   const handleAddToCart = (selectedProduct: ProductType) => {
-    setCartItems(prev => {
-      const isProductAddedToCart = prev.find(product => product.id === selectedProduct.id);
+    setCartItems((prev) => {
+      const isProductAddedToCart = prev.find(
+        (product) => product.id === selectedProduct.id
+      );
       if (isProductAddedToCart) {
-        return prev.map(product => product.id === selectedProduct.id ? {...product, amount: product.amount + 1} : product);
+        return prev.map((product) =>
+          product.id === selectedProduct.id
+            ? { ...product, amount: product.amount + 1 }
+            : product
+        );
       } else {
-        return [...prev, {...selectedProduct, amount: 1}];
+        return [...prev, { ...selectedProduct, amount: 1 }];
       }
-    })
+    });
   };
 
   const handleRemoveFromCart = (selectedProduct: ProductType) => {
-    setCartItems(prev => {
-      const isProductAmountLargerThanOne = prev.find(product => product.id === selectedProduct.id && product.amount > 1);
+    setCartItems((prev) => {
+      const isProductAmountLargerThanOne = prev.find(
+        (product) => product.id === selectedProduct.id && product.amount > 1
+      );
       if (isProductAmountLargerThanOne) {
-        return prev.map(product => product.id === selectedProduct.id ? {...product, amount: product.amount - 1} : product);
+        return prev.map((product) =>
+          product.id === selectedProduct.id
+            ? { ...product, amount: product.amount - 1 }
+            : product
+        );
       } else {
-        return prev.filter(product => product.id !== selectedProduct.id);
+        return prev.filter((product) => product.id !== selectedProduct.id);
       }
-    })
+    });
   };
 
   const openCart = () => {
@@ -69,15 +81,8 @@ const App = () => {
 
   return (
     <div className='App'>
-      <SearchBar
-        cartItems={cartItems}
-        openCart={openCart}
-      />
-      <Drawer
-        anchor='right'
-        open={cartOpen}
-        onClose={() => setCartOpen(false)}
-      >
+      <SearchBar cartItems={cartItems} openCart={openCart} />
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
           cartItems={cartItems}
           handleAddToCart={handleAddToCart}
@@ -86,11 +91,17 @@ const App = () => {
       </Drawer>
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <LeftBar selectByCategory={selectByCategory}/>
+          <LeftBar selectByCategory={selectByCategory} />
         </Grid>
         <Grid item xs={8}>
           <ProductList
-            data={categories ? data.filter(product => product.category === categories.toLowerCase()) : data}
+            data={
+              !categories || categories === 'All products'
+                ? data
+                : data.filter(
+                    (product) => product.category === categories.toLowerCase()
+                  )
+            }
             handleAddToCart={handleAddToCart}
           />
         </Grid>
