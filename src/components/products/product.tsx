@@ -20,7 +20,10 @@ const Product: React.FC<ProductProps> = ({ product, handleAddToCart }) => {
       <CardContent>
         <h3>{product.title}</h3>
         <h3>${product.price}</h3>
-        <Rating name="read-only" value={product.rating.rate} readOnly />
+        <div className='rating'>
+          <Rating name='read-only' value={product.rating.rate} readOnly />
+          <span>{product.rating.count} ratings</span>
+        </div>
       </CardContent>
       <Button onClick={() => handleAddToCart(product)}>Add to cart</Button>
     </Card>
