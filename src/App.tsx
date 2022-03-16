@@ -6,6 +6,7 @@ import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
 import Cart from './components/Cart/Cart';
+import Intro from './components/Intro/Intro';
 
 export type ProductType = {
   id: number;
@@ -136,6 +137,7 @@ const App = () => {
         openCart={openCart}
         setSearch={setSearch}
       />
+
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
           cartItems={cartItems}
@@ -143,11 +145,15 @@ const App = () => {
           handleRemoveFromCart={handleRemoveFromCart}
         />
       </Drawer>
+
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Intro />
+        </Grid>
         <Grid item xs={3}>
           <LeftBar selectByCategory={selectByCategory} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <ProductList
             data={displayProducts()}
             handleAddToCart={handleAddToCart}
