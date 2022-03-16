@@ -7,10 +7,10 @@ import {
   Typography,
   InputBase,
   Badge,
-  Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShopIcon from '@mui/icons-material/Shop';
 import { ProductType } from '../../App';
 
 type SearchBarProps = {
@@ -49,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -74,11 +73,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className='search_bar'>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='static'>
+        <AppBar position='static' color='default'>
           <Toolbar>
             <Box display='flex' flexGrow={1}>
               <Typography variant='h6' noWrap component='div'>
-                Twitch
+                TwitchE <ShopIcon fontSize="large" color="primary"/>
               </Typography>
               <Search>
                 <SearchIconWrapper>
