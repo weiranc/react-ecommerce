@@ -35,60 +35,69 @@ const App = () => {
     getCartList();
   }, []);
 
-  const productCollection = firebase.firestore().collection('products');
-
   const getData = () => {
-    productCollection.onSnapshot((querySnapshot) => {
-      const items: any = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setData(items);
-    });
+    axios.get('http://localhost:3001/products')
+      .then(response => {
+        console.log(response)
+        setData(response.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
   };
+  // const getData = () => {
+  //   const productCollection = firebase.firestore().collection('products');
+  //   productCollection.onSnapshot((querySnapshot) => {
+  //     const items: any = [];
+  //     querySnapshot.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //     setData(items);
+  //   });
+  // };
 
   const getCartList = () => {
-    let cartsDb = getDatabase();
-    const dbRef = ref(cartsDb, '/carts');
-    onValue(query(dbRef), (snapshot) => {
-      const carts = [];
-      for (let id in snapshot.val()) {
-        carts.push(snapshot.val()[id]);
-      }
-      setCartItems(carts);
-    });
+    // let cartsDb = getDatabase();
+    // const dbRef = ref(cartsDb, '/carts');
+    // onValue(query(dbRef), (snapshot) => {
+    //   const carts = [];
+    //   for (let id in snapshot.val()) {
+    //     carts.push(snapshot.val()[id]);
+    //   }
+    //   setCartItems(carts);
+    // });
   }
 
   const handleAddToCart = (selectedProduct: ProductType) => {
-    let cartsDb = getDatabase();
-    const isProductAddedToCart = cartItems.find(
-      (product) => product.id === selectedProduct.id
-    );
-    if (isProductAddedToCart) {
-      const newCart = cartItems.filter((product) => {
-        return product.id === selectedProduct.id
-      });
-      newCart[0].amount++;
-      set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
-    } else {
-      set(ref(cartsDb, `carts/${selectedProduct.id}`), { ...selectedProduct, amount: 1 });
-    }
+    // let cartsDb = getDatabase();
+    // const isProductAddedToCart = cartItems.find(
+    //   (product) => product.id === selectedProduct.id
+    // );
+    // if (isProductAddedToCart) {
+    //   const newCart = cartItems.filter((product) => {
+    //     return product.id === selectedProduct.id
+    //   });
+    //   newCart[0].amount++;
+    //   set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
+    // } else {
+    //   set(ref(cartsDb, `carts/${selectedProduct.id}`), { ...selectedProduct, amount: 1 });
+    // }
   };
 
   const handleRemoveFromCart = (selectedProduct: ProductType) => {
-    let cartsDb = getDatabase();
-    const isProductAmountLargerThanOne = cartItems.find(
-      (product) => product.id === selectedProduct.id && product.amount > 1
-    );
-    if (isProductAmountLargerThanOne) {
-      const newCart = cartItems.filter((product) => {
-        return product.id === selectedProduct.id
-      });
-      newCart[0].amount--;
-      set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
-    } else {
-      remove(ref(cartsDb, `carts/${selectedProduct.id}`));
-    }
+    // let cartsDb = getDatabase();
+    // const isProductAmountLargerThanOne = cartItems.find(
+    //   (product) => product.id === selectedProduct.id && product.amount > 1
+    // );
+    // if (isProductAmountLargerThanOne) {
+    //   const newCart = cartItems.filter((product) => {
+    //     return product.id === selectedProduct.id
+    //   });
+    //   newCart[0].amount--;
+    //   set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
+    // } else {
+    //   remove(ref(cartsDb, `carts/${selectedProduct.id}`));
+    // }
   };
 
   const openCart = () => {

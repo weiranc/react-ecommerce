@@ -1,22 +1,17 @@
-const firebase = require('../firebase');
-const { getDatabase, ref, set, onValue, query } = require();
-
-// const productCollection = firebase.firestore().collection('products');
+const { getDatabase, ref, set, onValue, query } = require('firebase/database');
+const { firestore } = require('firebase/compat/firestore');
+const firebase = require('./firebase');
 
 const controller = {
   getAll: function (req, res) {
-    // const citiesRef = db.collection('products');
-    // const snapshot = citiesRef.get();
-    // snapshot.forEach((doc) => {
-    //   console.log(doc.id, '=>', doc.data());
-    // });
-    // productCollection.onSnapshot((querySnapshot) => {
-    //   const items: any = [];
-    //   querySnapshot.forEach((doc) => {
-    //     items.push(doc.data());
-    //   });
-    //   res.status(200).send(items);
-    // });
+    const productCollection = firebase.firestore().collection('products');
+    productCollection.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      res.status(200).send(items);
+    });
   },
 };
 
