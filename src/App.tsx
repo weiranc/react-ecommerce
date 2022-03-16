@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import firebase from './firebase';
 import './App.css';
 import ProductList from './components/products/ProductList';
 import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
 import Cart from './components/Cart/Cart';
-import {
-  getDatabase,
-  ref,
-  set,
-  onValue,
-  query,
-  remove,
-} from 'firebase/database';
 
 export type ProductType = {
   id: number;
@@ -31,6 +22,7 @@ const App = () => {
   const [data, setData] = useState([] as ProductType[]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as ProductType[]);
+  const [totalItems, setTotalItems] = useState(0);
   const [categories, setCategories] = useState('' as ProductType['category']);
   const [search, setSearch] = useState('');
 
@@ -40,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     getCartList();
-  }, []);
+  }, [totalItems]);
 
   const getData = () => {
     axios
@@ -77,7 +69,7 @@ const App = () => {
         .put(`${process.env.REACT_APP_SERVER}/carts/${selectedProduct.id}`, {
           newQuantity: newCart[0],
         })
-        .then((response) => console.log('Updated'))
+        .then((response) => {console.log('Updated')})
         .catch((err) => console.error(err));
     } else {
       let data = { ...selectedProduct, amount: 1 };
@@ -88,6 +80,7 @@ const App = () => {
         .then((response) => console.log('Added to cart'))
         .catch((err) => console.error(err));
     }
+    setTotalItems(totalItems + 1);
   };
 
   const handleRemoveFromCart = (selectedProduct: ProductType) => {
@@ -109,6 +102,7 @@ const App = () => {
       axios
         .delete(`${process.env.REACT_APP_SERVER}/carts/${selectedProduct.id}`)
     }
+    setTotalItems(totalItems - 1);
   };
 
   const openCart = () => {

@@ -1,12 +1,6 @@
-const {
-  getDatabase,
-  ref,
-  set,
-  onValue,
-  query,
-  remove,
-} = require('firebase/database');
+const { getDatabase, ref, set, remove } = require('firebase/database');
 const { firestore } = require('firebase/compat/firestore');
+const { database } = require('firebase/compat/database');
 const firebase = require('./firebase');
 
 const controller = {
@@ -17,34 +11,33 @@ const controller = {
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
-      res.status(200).send(items);
+      return res.status(200).send(items);
     });
   },
   getCart: function (req, res) {
-    let cartsDb = getDatabase();
-    const dbRef = ref(cartsDb, '/carts');
-    onValue(query(dbRef), (snapshot) => {
+    let ref = firebase.database().ref('carts');
+    ref.once('value', (snapshot) => {
       const carts = [];
       for (let id in snapshot.val()) {
         carts.push(snapshot.val()[id]);
       }
-      res.status(200).send(carts);
+      return res.status(200).send(carts);
     });
   },
   addToCart: function (req, res) {
     let cartsDb = getDatabase();
     set(ref(cartsDb, `/carts/${req.params.id}`), req.body.data);
-    res.status(204).send('success');
+    return res.status(204).send('success');
   },
   updateCart: function (req, res) {
     let cartsDb = getDatabase();
     set(ref(cartsDb, `/carts/${req.params.id}`), req.body.newQuantity);
-    res.status(204).send('success');
+    return res.status(204).send('success');
   },
   removeFromCart: function (req, res) {
     let cartsDb = getDatabase();
-    remove(ref(cartsDb, `carts/${req.params.id}`));
-    res.status(204).send('success');
+    remove(ref(cartsDb, `/carts/${req.params.id}`));
+    return res.status(204).send('success');
   },
 };
 
