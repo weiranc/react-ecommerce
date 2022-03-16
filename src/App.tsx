@@ -7,7 +7,7 @@ import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
 import Cart from './components/Cart/Cart';
-import { getDatabase, ref, set, onValue, query, update } from 'firebase/database';
+import { getDatabase, ref, set, onValue, query, remove } from 'firebase/database';
 
 export type ProductType = {
   id: number;
@@ -76,20 +76,19 @@ const App = () => {
   };
 
   const handleRemoveFromCart = (selectedProduct: ProductType) => {
-    setCartItems((prev) => {
-      const isProductAmountLargerThanOne = prev.find(
-        (product) => product.id === selectedProduct.id && product.amount > 1
-      );
-      if (isProductAmountLargerThanOne) {
-        return prev.map((product) =>
-          product.id === selectedProduct.id
-            ? { ...product, amount: product.amount - 1 }
-            : product
-        );
-      } else {
-        return prev.filter((product) => product.id !== selectedProduct.id);
-      }
-    });
+    let cartsDb = getDatabase();
+    const isProductAmountLargerThanOne = cartItems.find(
+      (product) => product.id === selectedProduct.id && product.amount > 1
+    );
+    if (isProductAmountLargerThanOne) {
+      const newCart = cartItems.filter((product) => {
+        return product.id === selectedProduct.id
+      });
+      newCart[0].amount--;
+      set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
+    } else {
+      remove(ref(cartsDb, `carts/${selectedProduct.id}`));
+    }
   };
 
   const openCart = () => {
