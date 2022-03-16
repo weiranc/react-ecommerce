@@ -61,6 +61,19 @@
   margin-inline: 25%;
 }
 
+.cart_check_out {
+  margin: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.cart_subtotal {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  text-align: center;
+  font-size: large;
+}
+
 .cart_img {
   max-width: 100px;
   object-fit: cover;
