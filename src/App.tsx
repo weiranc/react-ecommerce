@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import firebase from './firebase';
 import './App.css';
 import ProductList from './components/products/ProductList';
@@ -6,7 +7,7 @@ import { Grid, Drawer } from '@mui/material';
 import LeftBar from './components/LeftBar/LeftBar';
 import SearchBar from './components/SearchBar/SearchBar';
 import Cart from './components/Cart/Cart';
-import { getDatabase, ref, set, onValue, query } from 'firebase/database';
+import { getDatabase, ref, set, onValue, query, update } from 'firebase/database';
 
 export type ProductType = {
   id: number;
@@ -30,6 +31,10 @@ const App = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    getCartList();
+  }, []);
+
   const productCollection = firebase.firestore().collection('products');
 
   const getData = () => {
@@ -42,32 +47,32 @@ const App = () => {
     });
   };
 
-  const handleAddToCart = (selectedProduct: ProductType) => {
-    setCartItems((prev) => {
-      const isProductAddedToCart = prev.find(
-        (product) => product.id === selectedProduct.id
-      );
-      if (isProductAddedToCart) {
-        return prev.map((product) =>
-          product.id === selectedProduct.id
-            ? { ...product, amount: product.amount + 1 }
-            : product
-        );
-      } else {
-        return [...prev, { ...selectedProduct, amount: 1 }];
-      }
-    });
-
-    const cartsDb = getDatabase();
-    set(ref(cartsDb, `carts/${selectedProduct.id}`), {
-      productId: selectedProduct.id,
-      quantity: 1,
-    });
-
+  const getCartList = () => {
+    let cartsDb = getDatabase();
     const dbRef = ref(cartsDb, '/carts');
     onValue(query(dbRef), (snapshot) => {
-      console.log(snapshot.val());
+      const carts = [];
+      for (let id in snapshot.val()) {
+        carts.push(snapshot.val()[id]);
+      }
+      setCartItems(carts);
     });
+  }
+
+  const handleAddToCart = (selectedProduct: ProductType) => {
+    let cartsDb = getDatabase();
+    const isProductAddedToCart = cartItems.find(
+      (product) => product.id === selectedProduct.id
+    );
+    if (isProductAddedToCart) {
+      const newCart = cartItems.filter((product) => {
+        return product.id === selectedProduct.id
+      });
+      newCart[0].amount++;
+      set(ref(cartsDb, `carts/${selectedProduct.id}`), newCart[0]);
+    } else {
+      set(ref(cartsDb, `carts/${selectedProduct.id}`), { ...selectedProduct, amount: 1 });
+    }
   };
 
   const handleRemoveFromCart = (selectedProduct: ProductType) => {
