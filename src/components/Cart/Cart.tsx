@@ -19,6 +19,7 @@ const Cart: React.FC<CartProps> = ({
       {cartItems &&
         cartItems.map((cartItem) => (
           <CartItem
+            key={cartItem.id}
             cartItem={cartItem}
             handleAddToCart={handleAddToCart}
             handleRemoveFromCart={handleRemoveFromCart}
