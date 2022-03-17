@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { ProductType } from '../../App';
 import CartItem from './CartItem';
 
@@ -7,19 +8,15 @@ type CartProps = {
   cartItems: ProductType[];
   handleAddToCart: (selectedProduct: ProductType) => void;
   handleRemoveFromCart: (selectedProduct: ProductType) => void;
+  getTotalPrice: () => void;
 };
 
 const Cart: React.FC<CartProps> = ({
   cartItems,
   handleAddToCart,
   handleRemoveFromCart,
+  getTotalPrice,
 }) => {
-
-  const getTotalPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => item.price * item.amount + total, 0);
-    return totalPrice.toFixed(2);
-  }
-
   return (
     <div className='cart'>
       <h2>Selected items:</h2>
@@ -32,10 +29,17 @@ const Cart: React.FC<CartProps> = ({
             handleRemoveFromCart={handleRemoveFromCart}
           />
         ))}
-      <div className='cart_subtotal'>Subtotal <b>${getTotalPrice()}</b></div>
+      <div className='cart_subtotal'>
+        Subtotal <b>${getTotalPrice()}</b>
+      </div>
       <div className='cart_check_out'>
         <Button variant='contained' sx={{ backgroundColor: 'orange' }}>
-          Proceed to checkout
+          <Link
+            to='/payment'
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            Proceed to checkout
+          </Link>
         </Button>
       </div>
     </div>
