@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,12 +12,26 @@ const PaymentForm: React.FC<paymentProps> = ({ getTotalPrice }) => {
   const [success, setSuccess] = useState(false);
   const stripe: any = useStripe();
   const elements: any = useElements();
+  const [billingInfo, setBillingInfo] = useState({
+    name: '',
+    email: '',
+    address: '',
+    city: '',
+    state: '',
+    zipcode: null,
+  });
+
+  const insertInfo = (e: any) => {
+    setBillingInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
+      billing_details: billingInfo,
     });
 
     if (!error) {
@@ -61,19 +75,78 @@ const PaymentForm: React.FC<paymentProps> = ({ getTotalPrice }) => {
           />
           <h2>Checkout</h2>
           <form onSubmit={handleSubmit}>
+            <TextField
+              name='name'
+              label='Name'
+              type='text'
+              placeholder='Name'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
+            <TextField
+              name='email'
+              label='Email'
+              type='email'
+              placeholder='Email'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
+            <TextField
+              name='address'
+              label='Address'
+              type='text'
+              placeholder='Address'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
+            <TextField
+              name='city'
+              label='City'
+              type='text'
+              placeholder='City'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
+            <TextField
+              name='state'
+              label='State'
+              type='text'
+              placeholder='State'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
+            <TextField
+              name='zipcode'
+              label='Zipcode'
+              type='text'
+              placeholder='Zipcode'
+              fullWidth
+              margin='dense'
+              size='small'
+              required
+              onChange={insertInfo}
+            />
             <fieldset className='FormGroup'>
               <div className='FormRow'>
                 <CardElement />
               </div>
             </fieldset>
-            <div className='payment_button'>
-              <Button
-                variant='contained'
-                sx={{ backgroundColor: 'orange', width: '100px' }}
-              >
-                Pay
-              </Button>
-            </div>
+            <button className='payment_button'>Pay</button>
           </form>
         </div>
       ) : (
