@@ -4,10 +4,10 @@ E-Commerce application that allows users to purchase a list of products.
 
 This application:
 * Use a modern JS library/framework: React
-* Include user interactions such as viewing product list and product details, searching products, and adding or removing a product to/from a shopping cart
+* Include user interactions such as viewing product list and product details, searching products, adding or removing a product to/from a shopping cart, and initiating checkout process  
 * Utilize MVC architectural pattern
 * Integrate with a node server with CRUD operations
-* Integrate with firebase API
+* Integrate with firebase API and stripe API
 * Utilize MUI components, e.g., Grid, Drawer, AppBar, Box, Toolbar, Typography, InputBase, Badge, Card, Button, Rating, Modal, and List
 * Create reusable product component and cart component 
 
@@ -29,7 +29,7 @@ This application:
    ```sh
    npm install
    ```
-3. Update `.env` file if needed
+3. Update `.env` file based on `.env.example`
 4. Run webpack
 
    ```sh
@@ -46,10 +46,10 @@ This application:
 * [TypeScript](https://www.typescriptlang.org)
 * [Node](https://nodejs.dev/)
 * [ExpressJS](https://expressjs.com/)
-* [PostgreSQL](https://www.postgresql.org/)
 * [Webpack](https://webpack.js.org/)
 * [MUI](https://mui.com/)
 * [Firebase](https://firebase.google.com/)
+* [Stripe](https://stripe.com)
 
 ## Component Details
 
@@ -73,9 +73,9 @@ This application:
 
 ![modify](https://user-images.githubusercontent.com/91348196/158701371-95b61dae-0220-4bd8-b74a-4d4a7200a20b.gif)
 
+### Checkout
 
-
-
+![checkout](https://user-images.githubusercontent.com/91348196/158728338-b99eff01-5386-4f45-b115-67ae1368d916.gif)
 
 
 
