@@ -8,5 +8,6 @@ router
   .post(controller.addToCart)
   .put(controller.updateCart)
   .delete(controller.removeFromCart);
+router.route('/payment').post(controller.checkout);
 
 module.exports = router;
