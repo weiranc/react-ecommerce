@@ -120,9 +120,18 @@
 }
 
 .payment_button {
-  display: flex;
-  justify-content: center;
+  background-color:rgba(197, 132, 10, 0.893);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
   margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
 }
 
 .payment_img {
@@ -140,5 +149,9 @@
 .payment_return {
   display: flex;
   justify-content: right;
-  margin-top: 20%;
+  margin-top: 5%;
+}
+
+.FormGroup {
+  margin-top: 10px;
 }
