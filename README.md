@@ -1,13 +1,13 @@
 # E-Commerce Application
 
-E-Commerce application that allows users to purchase a list of products. Features implemented for this release focus on the client experience which enables customers to search, add to cart, and checkout. 
+E-Commerce application that allows users to purchase a list of products. Features implemented for this release focus on the client experience which enables customers to search, add to cart, and checkout. User authentication and product details with reviews, wishlist, and Q&A sections are potential features for future releases. 
 
 This application:
 * Use a modern JS library/framework: React
 * Include user interactions such as viewing product list and product details, searching products, adding or removing a product to/from a shopping cart, and initiating the checkout process  
 * Utilize MVC architectural pattern
 * Integrate with a node server with CRUD operations
-* Integrate with firebase API and Stripe API
+* Integrate with Firebase API and Stripe API
 * Utilize MUI components, e.g., Grid, Drawer, AppBar, Box, Toolbar, Typography, InputBase, Badge, Card, Button, Rating, Modal, and List
 * Create reusable product component and cart component 
 
@@ -20,6 +20,9 @@ This application:
 1. [Installation](#installation)
 2. [Technologies](#technologies)
 3. [Component Details](#component-details)
+4. [UI Design](#ui-design)
+5. [Realtime Database](#realtime-database)
+6. [Online Payment](#online-payment)
 
 ## Installation
 
@@ -97,11 +100,12 @@ Users are able to checkout by providing billing info.
 ## UI Design
 
 The web-based interface was designed using Figma. 
+
 ![UI](https://user-images.githubusercontent.com/91348196/159056986-29984f5c-3b94-47e5-870f-4b8fe3eb6392.png)
 
 ## Realtime Database
 
-All the product and cart data were stored in realtime with the Firebase Realtime Database. Data is stored as JSON and synchronized in realtime to every connected client. All clients share one Realtime Database instance and automatically receive updates with the newest data.
+All the product and cart data are stored in realtime with the Firebase Realtime Database. Data is stored as JSON and synchronized to every connected client. All clients share one Realtime Database instance and automatically receive updates with the newest data.
 
 ## Online Payment
 
