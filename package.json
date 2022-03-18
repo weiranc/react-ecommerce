@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "firebase": "^9.6.8",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-material-ui-carousel": "^3.2.0",
@@ -34,8 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server/index.js",
-    "dev": "npm start & npm run server"
+    "server": "nodemon server/index.js"
   },
   "eslintConfig": {
     "extends": [
