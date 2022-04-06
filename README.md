@@ -11,10 +11,6 @@ This application:
 * Utilize MUI components, e.g., Grid, Drawer, AppBar, Box, Toolbar, Typography, InputBase, Badge, Card, Button, Rating, Modal, and List
 * Create reusable product component and cart component 
 
-## :eyes: Demo Website
-
-👉  demo: http://54.193.160.212/
-
 ## Table of Contents
 
 1. [Installation](#installation)
